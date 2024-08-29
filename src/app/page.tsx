@@ -17,7 +17,7 @@ export default function Home() {
             <BlurIn
               word={"Card Title"}
               duration={0.5}
-              className=" text-red-500 m-2"
+              className="lg:text-3xl"
             />
           </CardTitle>
           <CardDescription>Card Description</CardDescription>
