@@ -15,6 +15,21 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { MinusCircle, PlusCircle, Trash2, Eye } from "lucide-react";
 
+// Import or define your Property type here
+interface Property {
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  image: string;
+  location: string;
+  bedrooms: number;
+  hasWifi: boolean;
+  quantity?: number;
+  amenities: string[];
+  bookingDate?: string; // Add this line
+}
+
 // Assuming PropertyDetailsModal is a separate component
 import PropertyDetailsModal from "@/app/components/PropertyDetailsModal";
 
@@ -86,7 +101,7 @@ export default function CartPage() {
                         <DialogHeader>
                           <DialogTitle>{item.title}</DialogTitle>
                         </DialogHeader>
-                        <PropertyDetailsModal property={item} />
+                        <PropertyDetailsModal property={item} onClose={() => console.log('Modal closed')} />
                       </DialogContent>
                     </Dialog>
                     <Button
