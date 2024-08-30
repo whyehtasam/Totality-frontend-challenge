@@ -20,11 +20,10 @@ import PropertyDetailsModal from "@/app/components/PropertyDetailsModal";
 
 export default function CartPage() {
   const router = useRouter();
-  const { cart, total, removeFromCart, clearCart, updateCartItem } =
-    useBooking();
-  const [selectedProperty, setSelectedProperty] = useState(null);
+  const { cart, total, removeFromCart, clearCart, updateCartItem } = useBooking();
+  const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
 
-  const handleViewDetails = (property: any) => {
+  const handleViewDetails = (property: Property) => {
     setSelectedProperty(property);
   };
 
@@ -53,18 +52,18 @@ export default function CartPage() {
                         variant="outline"
                         size="icon"
                         onClick={() =>
-                          updateCartItem(item.id, item.quantity - 1)
+                          updateCartItem(item.id, (item.quantity ?? 1) - 1)  // Ensure quantity is a number
                         }
-                        disabled={item.quantity <= 1}
+                        disabled={(item.quantity ?? 1) <= 1}
                       >
                         <MinusCircle className="w-4 h-4" />
                       </Button>
-                      <span className="w-8 text-center">{item.quantity}</span>
+                      <span className="w-8 text-center">{item.quantity ?? 1}</span>
                       <Button
                         variant="outline"
                         size="icon"
                         onClick={() =>
-                          updateCartItem(item.id, item.quantity + 1)
+                          updateCartItem(item.id, (item.quantity ?? 0) + 1)  // Ensure quantity is a number
                         }
                       >
                         <PlusCircle className="w-4 h-4" />
