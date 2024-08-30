@@ -1,13 +1,19 @@
+"use client"
+
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
 interface Property {
-  id: string;
+  id: number;
   title: string;
   description: string;
   price: number;
   image: string;
-  bookingDate?: string;
-  quantity?: number; // Make quantity optional
+  location: string;
+  bedrooms: number;
+  hasWifi: boolean;
+  quantity?: number;
+  amenities: string[];
+  bookingDate?: string; // Add this line
 }
 
 // Extend the context with favorites management
@@ -16,11 +22,12 @@ interface BookingContextProps {
   favorites: Set<string>; // Use a Set to store favorite property IDs
   total: number;
   addToCart: (property: Property) => void;
-  removeFromCart: (id: string) => void;
-  updateCartItem: (id: string, quantity: number) => void;
+  removeFromCart: (id: number) => void;
+  updateCartItem: (id: number, quantity: number) => void;
   clearCart: () => void;
-  toggleFavorite: (id: string) => void;
-  isFavorite: (id: string) => boolean;
+  toggleFavorite: (id: number) => void;
+  isFavorite: (id: number) => boolean;
+  hasWifi?: boolean;
 }
 
 const BookingContext = createContext<BookingContextProps | undefined>(undefined);
@@ -43,11 +50,11 @@ export const BookingProvider: React.FC<{ children: ReactNode }> = ({ children })
     });
   };
 
-  const removeFromCart = (id: string) => {
+  const removeFromCart = (id: number) => {
     setCart((prevCart) => prevCart.filter((item) => item.id !== id));
   };
 
-  const updateCartItem = (id: string, quantity: number) => {
+  const updateCartItem = (id: number, quantity: number) => {
     setCart((prevCart) =>
       prevCart.map((item) =>
         item.id === id ? { ...item, quantity } : item
@@ -59,20 +66,20 @@ export const BookingProvider: React.FC<{ children: ReactNode }> = ({ children })
     setCart([]);
   };
 
-  const toggleFavorite = (id: string) => {
+  const toggleFavorite = (id: number) => {
     setFavorites((prevFavorites) => {
       const newFavorites = new Set(prevFavorites);
-      if (newFavorites.has(id)) {
-        newFavorites.delete(id);
+      if (newFavorites.has(id.toString())) {
+        newFavorites.delete(id.toString());
       } else {
-        newFavorites.add(id);
+        newFavorites.add(id.toString());
       }
       return newFavorites;
     });
   };
-
-  const isFavorite = (id: string) => {
-    return favorites.has(id);
+  
+  const isFavorite = (id: number) => {
+    return favorites.has(id.toString());
   };
 
   const total = cart.reduce((acc, item) => acc + (item.price * (item.quantity || 1)), 0);

@@ -3,15 +3,19 @@
 import React from "react";
 import PropertyCard from "@/app/components/PropertyCard";
 
+
+
 interface Property {
   id: number;
   title: string;
   description: string;
   price: number;
+  image: string;
   location: string;
   bedrooms: number;
+  hasWifi: boolean;
+  quantity?: number;
   amenities: string[];
-  image: string;
 }
 
 interface PropertyListProps {

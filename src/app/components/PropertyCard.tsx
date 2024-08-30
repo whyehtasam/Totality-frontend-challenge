@@ -15,6 +15,8 @@ interface Property {
   bedrooms: number;
   hasWifi: boolean;
   quantity?: number;
+  amenities: string[];
+  bookingDate?: string; // Add this line
 }
 
 interface PropertyCardProps {
