@@ -18,7 +18,11 @@ const BookingPage: React.FC = () => {
           {cart.map((item) => (
             <CartItem
               key={item.id}
-              item={item}
+              item={{
+                id: Number(item.id),
+                title: item.title,
+                price: item.price,
+              }}
               onRemove={() => removeFromCart(item.id)}
             />
           ))}
