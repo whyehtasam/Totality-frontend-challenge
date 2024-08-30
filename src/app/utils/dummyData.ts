@@ -1,0 +1,43 @@
+// app/utils/dummyData.ts
+export const properties = [
+    {
+      id: 1,
+      title: "Cozy Apartment",
+      description: "A cozy apartment in the city center.",
+      price: 100,
+      location: "New York",
+      bedrooms: 2,
+      amenities: ["WiFi", "Parking"],
+      image: "https://plus.unsplash.com/premium_photo-1676823553207-758c7a66e9bb?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YXBwYXJ0bWVudHN8ZW58MHx8MHx8fDA%3D",
+    },
+    {
+      id: 2,
+      title: "Luxury Villa",
+      description: "A luxury villa with a beautiful view.",
+      price: 200,
+      location: "Los Angeles",
+      bedrooms: 4,
+      amenities: ["Pool", "WiFi"],
+      image: "https://plus.unsplash.com/premium_photo-1661880234863-bc0723394376?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8YXBwYXJ0bWVudHN8ZW58MHx8MHx8fDA%3D",
+    },
+    {
+      id: 3,
+      title: "Modern Condo",
+      description: "A modern condo with all amenities.",
+      price: 150,
+      location: "Chicago",
+      bedrooms: 3,
+      amenities: ["Gym", "WiFi"],
+      image: "https://plus.unsplash.com/premium_photo-1661906854568-8964f58ed859?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8YXBwYXJ0bWVudHN8ZW58MHx8MHx8fDA%3D",
+    },
+    {
+      id: 4,
+      title: "Beach House",
+      description: "A beach house with a beautiful ocean view.",
+      price: 250,
+      location: "Miami",
+      bedrooms: 4,
+      amenities: ["Pool", "WiFi", "Beach Access"],
+      image: "https://images.unsplash.com/photo-1640613111073-94a7ed36eb65?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8YXBwYXJ0bWVudHN8ZW58MHx8MHx8fDA%3D",
+    },
+  ]
