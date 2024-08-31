@@ -1,9 +1,15 @@
 import React from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardContent, CardFooter, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardHeader,
+  CardContent,
+  CardFooter,
+  CardTitle,
+} from "@/components/ui/card";
 import { useBooking } from "@/context/BookingContext";
-import { Heart, MapPin, Bed, Wifi, DollarSign } from "lucide-react";
+import { Heart, MapPin, Bed, Wifi, DollarSign, Waves } from "lucide-react";
 
 interface Property {
   id: number;
@@ -13,7 +19,7 @@ interface Property {
   image: string;
   location: string;
   bedrooms: number;
-  hasWifi?:boolean;
+  hasWifi?: boolean;
   quantity?: number;
   amenities: string[];
   bookingDate?: string; // Add this line
@@ -23,7 +29,9 @@ interface PropertyCardProps {
   property: Property;
 }
 
-const PropertyCard: React.FC<PropertyCardProps> = ({ property }: PropertyCardProps) => {
+const PropertyCard: React.FC<PropertyCardProps> = ({
+  property,
+}: PropertyCardProps) => {
   const { addToCart, favorites, toggleFavorite, isFavorite } = useBooking();
 
   // Function to handle booking a property
@@ -51,7 +59,9 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property }: PropertyCardPro
           >
             <Heart
               className={`h-5 w-5 ${
-                isFavorite(property.id) ? "fill-red-500 text-red-500" : "text-gray-600"
+                isFavorite(property.id)
+                  ? "fill-red-500 text-red-500"
+                  : "text-gray-600"
               }`}
             />
           </Button>
@@ -68,12 +78,32 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property }: PropertyCardPro
             <Bed className="h-4 w-4 mr-1" />
             <span>{property.bedrooms} Beds</span>
           </div>
-          {property.hasWifi && (
+          {/* {property.amenities.includes("WiFi") && (
             <div className="flex items-center">
               <Wifi className="h-4 w-4 mr-1" />
               <span>WiFi</span>
             </div>
-          )}
+          )} */}
+          {property.amenities.map((a) => {
+            return (
+              <>
+                {a === "WiFi" && (
+                  <div className="flex items-center">
+                    <Wifi className="h-4 w-4 mr-1" />
+                    <span>WiFi</span>
+                  </div>
+                )}
+                
+                {a === "Pool" && (
+                  <div className="flex items-center">
+                    <Waves className="h-4 w-4 mr-1" />
+                    <span>Pool</span>
+                  </div>
+                )}
+                
+              </>
+            );
+          })}
         </div>
       </CardContent>
       <CardFooter className="flex justify-between items-center p-4 bg-muted/50">
@@ -82,7 +112,12 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property }: PropertyCardPro
           <span className="text-lg font-semibold">{property.price}</span>
           <span className="text-sm text-muted-foreground ml-1">/ night</span>
         </div>
-        <Button onClick={handleBookNow} className="active:scale-95 transition-all hover:bg-gray-700 ">Book Now</Button>
+        <Button
+          onClick={handleBookNow}
+          className="active:scale-95 transition-all hover:bg-gray-700 "
+        >
+          Book Now
+        </Button>
       </CardFooter>
     </Card>
   );

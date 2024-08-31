@@ -113,8 +113,9 @@ const FilterBar: React.FC<FilterBarProps> = ({ onFilterChange }) => {
                 </SelectContent>
               </Select>
             </div>
-            <div className="flex items-center space-x-2">
-              <Checkbox
+            <div className="flex items-center space-x-4">
+              <div className="space-x-2">
+                <Checkbox
                 id="wifi"
                 checked={amenities.includes("WiFi")}
                 onCheckedChange={(checked) =>
@@ -125,7 +126,24 @@ const FilterBar: React.FC<FilterBarProps> = ({ onFilterChange }) => {
                   )
                 }
               />
-              <Label htmlFor="wifi">WiFi Available</Label>
+              <Label htmlFor="wifi">WiFi </Label>
+              </div>
+              
+              <div className="space-x-2">
+                <Checkbox
+                id="pool"
+                checked={amenities.includes("Pool")}
+                onCheckedChange={(checked) =>
+                  setAmenities((prev) =>
+                    checked
+                      ? [...prev, "Pool"]
+                      : prev.filter((a) => a !== "Pool")
+                  )
+                }
+              />
+              <Label htmlFor="pool">Pool </Label>
+              </div>
+              
             </div>
             {/* Add more amenities filters as needed */}
           </div>
