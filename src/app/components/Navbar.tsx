@@ -129,7 +129,7 @@ const Navbar = () => {
                       <img
                         src={user.photoURL}
                         alt="User Avatar"
-                        className="h-5 w-5 rounded-full"
+                        className="h-7 w-7 rounded-full"
                       />
                     ) : (
                       <User className="h-5 w-5" />
@@ -139,7 +139,7 @@ const Navbar = () => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   <DropdownMenuItem>
-                    <Link href="/profile">Profile</Link>
+                    <Link href="/profile">Hello, {user.displayName}</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem>
                     <Link href="/settings">Settings</Link>
