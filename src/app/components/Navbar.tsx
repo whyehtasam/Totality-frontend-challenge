@@ -95,7 +95,7 @@ const Navbar = () => {
           </div>
         </div>
 
-        <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
+        <div className="flex flex-1 items-center justify-end space-x-2 md:justify-end">
           <div className="hidden sm:inline-block w-full flex-1 md:w-auto md:flex-none">
             <form className="relative">
               <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
@@ -106,7 +106,7 @@ const Navbar = () => {
               />
             </form>
           </div>
-          <nav className="flex items-center space-x-2 w-full">
+          <nav className="flex items-center space-x-2 ">
             <Link href="/cart">
               <Button variant="ghost" size="icon" className="md:flex relative">
                 <ShoppingCart className="h-5 w-5" />
