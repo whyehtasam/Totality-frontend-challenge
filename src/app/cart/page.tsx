@@ -11,12 +11,14 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogDescription,
+  DialogFooter,
 } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
 import { MinusCircle, PlusCircle, Trash2, Eye } from "lucide-react";
-
-// Import or define your Property type here
-interface Property {
+import { Calendar, DollarSign, MapPin } from "lucide-react";
+// Import or define your item type here
+interface item {
   id: number;
   title: string;
   description: string;
@@ -30,16 +32,19 @@ interface Property {
   bookingDate?: string; // Add this line
 }
 
-// Assuming PropertyDetailsModal is a separate component
-import PropertyDetailsModal from "@/app/components/PropertyDetailsModal";
+// Assuming itemDetailsModal is a separate component
+import itemDetailsModal from "@/app/components/itemDetailsModal";
+import PropertyDetailsDialog from "../components/PropertyDetailsModal";
 
 export default function CartPage() {
   const router = useRouter();
-  const { cart, total, removeFromCart, clearCart, updateCartItem } = useBooking();
-  const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
+  const { cart, total, removeFromCart, clearCart, updateCartItem } =
+    useBooking();
+  const [selecteditem, setSelecteditem] = useState<item | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const handleViewDetails = (property: Property) => {
-    setSelectedProperty(property);
+  const handleViewDetails = (item: item) => {
+    setSelecteditem(item);
   };
 
   const handleCheckout = () => {
@@ -66,19 +71,23 @@ export default function CartPage() {
                       <Button
                         variant="outline"
                         size="icon"
-                        onClick={() =>
-                          updateCartItem(item.id, (item.quantity ?? 1) - 1)  // Ensure quantity is a number
+                        onClick={
+                          () =>
+                            updateCartItem(item.id, (item.quantity ?? 1) - 1) // Ensure quantity is a number
                         }
                         disabled={(item.quantity ?? 1) <= 1}
                       >
                         <MinusCircle className="w-4 h-4" />
                       </Button>
-                      <span className="w-8 text-center">{item.quantity ?? 1}</span>
+                      <span className="w-8 text-center">
+                        {item.quantity ?? 1}
+                      </span>
                       <Button
                         variant="outline"
                         size="icon"
-                        onClick={() =>
-                          updateCartItem(item.id, (item.quantity ?? 0) + 1)  // Ensure quantity is a number
+                        onClick={
+                          () =>
+                            updateCartItem(item.id, (item.quantity ?? 0) + 1) // Ensure quantity is a number
                         }
                       >
                         <PlusCircle className="w-4 h-4" />
@@ -86,7 +95,7 @@ export default function CartPage() {
                     </div>
                   </div>
                   <div className="flex items-center justify-between mt-4">
-                    <Dialog>
+                    {/* <Dialog>
                       <DialogTrigger asChild>
                         <Button
                           variant="outline"
@@ -97,13 +106,45 @@ export default function CartPage() {
                           View Details
                         </Button>
                       </DialogTrigger>
-                      <DialogContent>
+                      <DialogContent className="sm:max-w-[425px]">
                         <DialogHeader>
                           <DialogTitle>{item.title}</DialogTitle>
+                          <DialogDescription>{item.location}</DialogDescription>
                         </DialogHeader>
-                        <PropertyDetailsModal property={item} onClose={() => console.log('Modal closed')} />
+                        <div className="relative w-full h-48 mb-4">
+                          <img
+                            src={item.image}
+                            alt={item.title}
+                            className="rounded-md"
+                          />
+                        </div>
+                        <p className="text-sm text-gray-500 mb-4">
+                          {item.description}
+                        </p>
+                        <div className="grid grid-cols-2 gap-4 mb-4">
+                          <div className="flex items-center">
+                            <DollarSign className="w-4 h-4 mr-2 text-green-500" />
+                            <span className="font-semibold">
+                              ${item.price} / night
+                            </span>
+                          </div>
+                          <div className="flex items-center">
+                            <Calendar className="w-4 h-4 mr-2 text-blue-500" />
+                            <span className="text-sm">{item.bookingDate}</span>
+                          </div>
+                        </div>
+                        <div className="flex items-center mb-4">
+                          <MapPin className="w-4 h-4 mr-2 text-red-500" />
+                          <span className="text-sm">{item.location}</span>
+                        </div>
+                        <DialogFooter>
+                          <Button onClick={() => setIsOpen(false)}>
+                            Close
+                          </Button>
+                        </DialogFooter>
                       </DialogContent>
-                    </Dialog>
+                    </Dialog> */}
+<PropertyDetailsDialog item={item} onClose={() => setIsOpen(false)} />
                     <Button
                       variant="destructive"
                       size="sm"
