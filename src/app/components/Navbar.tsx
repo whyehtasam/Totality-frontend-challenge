@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,11 +14,44 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
 import { Home, Menu, Search, ShoppingCart, User } from "lucide-react";
 import { useBooking } from "@/context/BookingContext"; // Import useBooking hook
-
+import { auth } from "@/app/utils/firebaseConfig"; // Import Firebase auth
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { useRouter } from "next/navigation";
+import ShimmerButton from "@/components/magicui/shimmer-button";
 const Navbar = () => {
   const { cart } = useBooking(); // Get cart from context
-  const cartItemsCount = cart.reduce((count, item) => count + (item.quantity || 0), 0); // Calculate total items in cart
+  const cartItemsCount = cart.reduce(
+    (count, item) => count + (item.quantity || 0),
+    0
+  ); // Calculate total items in cart
 
+  const [user, setUser] = useState<any>(null); // User state
+
+  const router = useRouter();
+  useEffect(() => {
+    // Listen for authentication state changes
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+
+    return () => unsubscribe(); // Cleanup subscription on unmount
+  }, []);
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      console.log("User signed out successfully");
+    } catch (error) {
+      console.error("Sign out error", error);
+    }
+  };
+
+  useEffect(() => {
+    if (user) {
+      console.log("User logged in:", user);
+      router.push("/");
+    }
+  }, [user]);
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 py-2">
       <div className="container flex h-14 items-center">
@@ -76,11 +109,7 @@ const Navbar = () => {
           </div>
           <nav className="flex items-center space-x-2">
             <Link href="/cart">
-              <Button
-                variant="ghost"
-                size="icon"
-                className=" md:flex relative"
-              >
+              <Button variant="ghost" size="icon" className="md:flex relative">
                 <ShoppingCart className="h-5 w-5" />
                 {cartItemsCount > 0 && (
                   <Badge
@@ -93,25 +122,44 @@ const Navbar = () => {
                 <span className="sr-only">Cart</span>
               </Button>
             </Link>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="relative">
-                  <User className="h-5 w-5" />
-                  <span className="sr-only">Toggle user menu</span>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem>
-                  <Link href="/profile">Profile</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Link href="/settings">Settings</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Link href="/logout">Logout</Link>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            {user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" size="icon" className="relative">
+                    {user.photoURL ? (
+                      <img
+                        src={user.photoURL}
+                        alt="User Avatar"
+                        className="h-5 w-5 rounded-full"
+                      />
+                    ) : (
+                      <User className="h-5 w-5" />
+                    )}
+                    <span className="sr-only">Toggle user menu</span>
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end">
+                  <DropdownMenuItem>
+                    <Link href="/profile">Profile</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Link href="/settings">Settings</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={handleLogout}>
+                    Logout
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Link href="/login">
+                
+                <ShimmerButton className="shadow-xl">
+                  <span className="whitespace-pre-wrap text-center text-sm font-medium leading-none tracking-tight text-white dark:from-white dark:to-slate-900/10 ">
+                   Login
+                  </span>
+                </ShimmerButton>
+              </Link>
+            )}
           </nav>
         </div>
       </div>

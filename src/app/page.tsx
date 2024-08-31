@@ -43,7 +43,7 @@ export default function HomePage() {
   };
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 min-h-[80vh] ">
       {/* <h1 className="text-4xl font-bold text-center mb-8">Property Listings</h1> */}
       <FilterBar onFilterChange={handleFilterChange} />
       <PropertyList properties={filteredProperties} />
