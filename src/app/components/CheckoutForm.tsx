@@ -79,7 +79,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({ onSubmit }) => {
             {cart.map((item) => (
               <li key={item.id} className="flex justify-between py-2 border-b">
                 <span>{item.title}</span>
-                <span>${item.price} x {item.quantity} = ${item.price * item.quantity}</span>
+                <span>${item.price} x {item.quantity} = ${(item.price || 0) * (item.quantity || 0)}</span>
               </li>
             ))}
           </ul>

@@ -10,7 +10,7 @@ interface Property {
   image: string;
   location: string;
   bedrooms: number;
-  hasWifi: boolean;
+  hasWifi?: boolean;
   quantity?: number;
   amenities: string[];
   bookingDate?: string; // Add this line

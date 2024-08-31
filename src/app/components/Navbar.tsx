@@ -17,7 +17,7 @@ import { useBooking } from "@/context/BookingContext"; // Import useBooking hook
 
 const Navbar = () => {
   const { cart } = useBooking(); // Get cart from context
-  const cartItemsCount = cart.reduce((count, item) => count + item.quantity, 0); // Calculate total items in cart
+  const cartItemsCount = cart.reduce((count, item) => count + (item.quantity || 0), 0); // Calculate total items in cart
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 py-2">

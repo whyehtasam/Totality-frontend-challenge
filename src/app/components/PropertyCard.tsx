@@ -13,7 +13,7 @@ interface Property {
   image: string;
   location: string;
   bedrooms: number;
-  hasWifi: boolean;
+  hasWifi?:boolean;
   quantity?: number;
   amenities: string[];
   bookingDate?: string; // Add this line
@@ -23,7 +23,7 @@ interface PropertyCardProps {
   property: Property;
 }
 
-const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
+const PropertyCard: React.FC<PropertyCardProps> = ({ property }: PropertyCardProps) => {
   const { addToCart, favorites, toggleFavorite, isFavorite } = useBooking();
 
   // Function to handle booking a property
@@ -39,8 +39,8 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
           <img
             src={property.image}
             alt={property.title}
-            layout="fill"
-            objectFit="cover"
+            // layout="fill"
+            // objectFit="cover"
             className="rounded-t-lg h-44 sm:h-80 w-full object-cover"
           />
           <Button
