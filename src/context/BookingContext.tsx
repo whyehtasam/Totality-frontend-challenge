@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
@@ -13,10 +13,9 @@ interface Property {
   hasWifi?: boolean;
   quantity?: number;
   amenities: string[];
-  bookingDate?: string; // Add this line
+  bookingDate?: string;
 }
 
-// Extend the context with favorites management
 interface BookingContextProps {
   cart: Property[];
   favorites: Set<string>; // Use a Set to store favorite property IDs
@@ -27,7 +26,6 @@ interface BookingContextProps {
   clearCart: () => void;
   toggleFavorite: (id: number) => void;
   isFavorite: (id: number) => boolean;
-  hasWifi?: boolean;
 }
 
 const BookingContext = createContext<BookingContextProps | undefined>(undefined);
@@ -41,9 +39,7 @@ export const BookingProvider: React.FC<{ children: ReactNode }> = ({ children })
       const existingItem = prevCart.find((item) => item.id === property.id);
       if (existingItem) {
         return prevCart.map((item) =>
-          item.id === property.id
-            ? { ...item, quantity: (item.quantity || 1) + 1 }
-            : item
+          item.id === property.id ? { ...item, quantity: (item.quantity || 1) + 1 } : item
         );
       }
       return [...prevCart, { ...property, quantity: 1 }];
@@ -77,12 +73,10 @@ export const BookingProvider: React.FC<{ children: ReactNode }> = ({ children })
       return newFavorites;
     });
   };
-  
-  const isFavorite = (id: number) => {
-    return favorites.has(id.toString());
-  };
 
-  const total = cart.reduce((acc, item) => acc + (item.price * (item.quantity || 1)), 0);
+  const isFavorite = (id: number) => favorites.has(id.toString());
+
+  const total = cart.reduce((acc, item) => acc + item.price * (item.quantity || 1), 0);
 
   return (
     <BookingContext.Provider
@@ -105,6 +99,7 @@ export const BookingProvider: React.FC<{ children: ReactNode }> = ({ children })
 
 export const useBooking = () => {
   const context = useContext(BookingContext);
+  console.log("Context in useBooking:", context); // Debugging line
   if (!context) {
     throw new Error("useBooking must be used within a BookingProvider");
   }

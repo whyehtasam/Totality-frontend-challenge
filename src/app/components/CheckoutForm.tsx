@@ -1,102 +1,100 @@
-// /app/components/CheckoutForm.tsx
-"use client";
+"use client"
 
-import React, { useState } from "react";
-import { useBooking } from "@/context/BookingContext";
+import React, { useState } from "react"
+import { useBooking } from "@/context/BookingContext"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Separator } from "@/components/ui/separator"
+import { Label } from "@/components/ui/label"
 
 type CheckoutFormProps = {
   onSubmit: (bookingDetails: {
-    name: string;
-    email: string;
-    phone: string;
-  }) => void;
-};
+    name: string
+    email: string
+    phone: string
+  }) => void
+}
 
-const CheckoutForm: React.FC<CheckoutFormProps> = ({ onSubmit }) => {
-  const { cart, total, clearCart } = useBooking();
+export default function CheckoutForm({ onSubmit }: CheckoutFormProps) {
+  const { cart, total, clearCart } = useBooking()
   const [contactInfo, setContactInfo] = useState({
     name: "",
     email: "",
     phone: "",
-  });
+  })
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setContactInfo({ ...contactInfo, [e.target.name]: e.target.value });
-  };
+    setContactInfo({ ...contactInfo, [e.target.name]: e.target.value })
+  }
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    // Pass booking details to parent component
-    onSubmit(contactInfo);
-
-    // Clear cart after checkout
-    clearCart();
-  };
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    onSubmit(contactInfo)
+    clearCart()
+  }
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Checkout</h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={contactInfo.name}
-            onChange={handleChange}
-            required
-            className="mt-1 block w-full border border-gray-300 rounded-md p-2"
-          />
-        </div>
-        <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={contactInfo.email}
-            onChange={handleChange}
-            required
-            className="mt-1 block w-full border border-gray-300 rounded-md p-2"
-          />
-        </div>
-        <div>
-          <label htmlFor="phone" className="block text-sm font-medium text-gray-700">Phone</label>
-          <input
-            type="tel"
-            id="phone"
-            name="phone"
-            value={contactInfo.phone}
-            onChange={handleChange}
-            required
-            className="mt-1 block w-full border border-gray-300 rounded-md p-2"
-          />
-        </div>
-        <div className="mb-4">
-          <h2 className="text-lg font-bold">Cart Summary</h2>
-          <ul>
-            {cart.map((item) => (
-              <li key={item.id} className="flex justify-between py-2 border-b">
-                <span>{item.title}</span>
-                <span>${item.price} x {item.quantity} = ${(item.price || 0) * (item.quantity || 0)}</span>
-              </li>
-            ))}
-          </ul>
-          <div className="flex justify-between font-bold mt-2">
-            <span>Total</span>
-            <span>${total}</span>
+    <Card className="w-full max-w-2xl mx-auto">
+      {/* <CardHeader>
+        <CardTitle>Checkout</CardTitle>
+      </CardHeader> */}
+      <CardContent>
+        <form onSubmit={handleSubmit} className="space-y-6 mt-5">
+          <div className="space-y-4">
+            <div>
+              <Label htmlFor="name">Name</Label>
+              <Input
+                id="name"
+                name="name"
+                value={contactInfo.name}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                value={contactInfo.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div>
+              <Label htmlFor="phone">Phone</Label>
+              <Input
+                id="phone"
+                name="phone"
+                type="tel"
+                value={contactInfo.phone}
+                onChange={handleChange}
+                required
+              />
+            </div>
           </div>
-        </div>
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
-        >
-          Complete Purchase
-        </button>
-      </form>
-    </div>
-  );
-};
-
-export default CheckoutForm;
+          <Separator className="my-4" />
+          <div>
+            <h3 className="text-lg font-semibold mb-2">Cart Summary</h3>
+            <ul className="space-y-2">
+              {cart.map((item) => (
+                <li key={item.id} className="flex justify-between text-sm">
+                  <span>{item.title}</span>
+                  <span>${item.price} x {item.quantity} = ${(item.price || 0) * (item.quantity || 0)}</span>
+                </li>
+              ))}
+            </ul>
+            <Separator className="my-2" />
+            <div className="flex justify-between font-semibold">
+              <span>Total</span>
+              <span>${total}</span>
+            </div>
+          </div>
+          <Button type="submit" className="w-full">Complete Purchase</Button>
+        </form>
+      </CardContent>
+    </Card>
+  )
+}

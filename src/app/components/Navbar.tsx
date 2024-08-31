@@ -77,9 +77,7 @@ const Navbar = () => {
               <Link href="/booking" className="block">
                 Bookings
               </Link>
-              <Link href="/cart" className="block">
-                Cart
-              </Link>
+              {/* <Link href="/favorites" className="block">Favorites</Link> */}
             </div>
           </SheetContent>
         </Sheet>
@@ -89,9 +87,10 @@ const Navbar = () => {
             <span className=" font-bold sm:inline-block">Property Rental</span>
           </Link>
           <div className="hidden sm:inline-block sm:flex items-center space-x-4 text-sm font-medium">
-            <Link href="/">Home</Link>
+            {/* <Link href="/">Home</Link> */}
             <Link href="/booking">Bookings</Link>
-            <Link href="/cart">Cart</Link>
+            {/* <Link href="/cart">Cart</Link> */}
+            {/* <Link href="/favorites">Favorites</Link> */}
           </div>
         </div>
 
