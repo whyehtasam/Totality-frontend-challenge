@@ -6,12 +6,12 @@ import { Eye, DollarSign, Calendar, MapPin, BedDouble, Bath, Users, Home, Info }
 import Image from "next/image"
 
 interface PropertyItem {
-  id: string
+  id: number
   title: string
   description: string
   image: string
   price: number
-  bookingDate: string
+  bookingDate?: string
   location: string
   bedrooms?: number
   bathrooms?: number

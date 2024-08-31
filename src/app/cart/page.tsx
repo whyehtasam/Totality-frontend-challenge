@@ -33,7 +33,7 @@ interface item {
 }
 
 // Assuming itemDetailsModal is a separate component
-import itemDetailsModal from "@/app/components/itemDetailsModal";
+// import itemDetailsModal from "@/app/components/itemDetailsModal";
 import PropertyDetailsDialog from "../components/PropertyDetailsModal";
 
 export default function CartPage() {
@@ -95,56 +95,11 @@ export default function CartPage() {
                     </div>
                   </div>
                   <div className="flex items-center justify-between mt-4">
-                    {/* <Dialog>
-                      <DialogTrigger asChild>
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => handleViewDetails(item)}
-                        >
-                          <Eye className="w-4 h-4 mr-2" />
-                          View Details
-                        </Button>
-                      </DialogTrigger>
-                      <DialogContent className="sm:max-w-[425px]">
-                        <DialogHeader>
-                          <DialogTitle>{item.title}</DialogTitle>
-                          <DialogDescription>{item.location}</DialogDescription>
-                        </DialogHeader>
-                        <div className="relative w-full h-48 mb-4">
-                          <img
-                            src={item.image}
-                            alt={item.title}
-                            className="rounded-md"
-                          />
-                        </div>
-                        <p className="text-sm text-gray-500 mb-4">
-                          {item.description}
-                        </p>
-                        <div className="grid grid-cols-2 gap-4 mb-4">
-                          <div className="flex items-center">
-                            <DollarSign className="w-4 h-4 mr-2 text-green-500" />
-                            <span className="font-semibold">
-                              ${item.price} / night
-                            </span>
-                          </div>
-                          <div className="flex items-center">
-                            <Calendar className="w-4 h-4 mr-2 text-blue-500" />
-                            <span className="text-sm">{item.bookingDate}</span>
-                          </div>
-                        </div>
-                        <div className="flex items-center mb-4">
-                          <MapPin className="w-4 h-4 mr-2 text-red-500" />
-                          <span className="text-sm">{item.location}</span>
-                        </div>
-                        <DialogFooter>
-                          <Button onClick={() => setIsOpen(false)}>
-                            Close
-                          </Button>
-                        </DialogFooter>
-                      </DialogContent>
-                    </Dialog> */}
-<PropertyDetailsDialog item={item} onClose={() => setIsOpen(false)} />
+                   
+                    <PropertyDetailsDialog
+                      item={item}
+                      onClose={() => setIsOpen(false)}
+                    />
                     <Button
                       variant="destructive"
                       size="sm"
