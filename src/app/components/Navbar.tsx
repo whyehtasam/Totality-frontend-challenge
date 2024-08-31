@@ -55,19 +55,6 @@ const Navbar = () => {
   return (
     <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 py-2">
       <div className="container flex h-14 items-center">
-        <div className="mr-4 hidden md:flex">
-          <Link className="mr-6 flex items-center space-x-2" href="/">
-            <Home className="h-6 w-6" />
-            <span className="hidden font-bold sm:inline-block">
-              Property Rental
-            </span>
-          </Link>
-          <div className="flex items-center space-x-4 text-sm font-medium">
-            <Link href="/">Home</Link>
-            <Link href="/booking">Bookings</Link>
-            <Link href="/cart">Cart</Link>
-          </div>
-        </div>
         <Sheet>
           <SheetTrigger asChild>
             <Button
@@ -96,8 +83,20 @@ const Navbar = () => {
             </div>
           </SheetContent>
         </Sheet>
+        <div className="mr-4  md:flex">
+          <Link className="mr-6 flex items-center space-x-2" href="/">
+            <Home className="hidden sm:inline-block h-6 w-6" />
+            <span className=" font-bold sm:inline-block">Property Rental</span>
+          </Link>
+          <div className="hidden sm:inline-block sm:flex items-center space-x-4 text-sm font-medium">
+            <Link href="/">Home</Link>
+            <Link href="/booking">Bookings</Link>
+            <Link href="/cart">Cart</Link>
+          </div>
+        </div>
+
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
-          <div className="w-full flex-1 md:w-auto md:flex-none">
+          <div className="hidden sm:inline-block w-full flex-1 md:w-auto md:flex-none">
             <form className="relative">
               <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
               <Input
@@ -107,7 +106,7 @@ const Navbar = () => {
               />
             </form>
           </div>
-          <nav className="flex items-center space-x-2">
+          <nav className="flex items-center space-x-2 w-full">
             <Link href="/cart">
               <Button variant="ghost" size="icon" className="md:flex relative">
                 <ShoppingCart className="h-5 w-5" />
@@ -152,10 +151,9 @@ const Navbar = () => {
               </DropdownMenu>
             ) : (
               <Link href="/login">
-                
                 <ShimmerButton className="shadow-xl">
                   <span className="whitespace-pre-wrap text-center text-sm font-medium leading-none tracking-tight text-white dark:from-white dark:to-slate-900/10 ">
-                   Login
+                    Login
                   </span>
                 </ShimmerButton>
               </Link>
