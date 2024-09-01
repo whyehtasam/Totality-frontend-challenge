@@ -90,7 +90,7 @@ const Navbar = () => {
             {/* <Link href="/">Home</Link> */}
             <Link href="/booking">Bookings</Link>
             {/* <Link href="/cart">Cart</Link> */}
-            {/* <Link href="/favorites">Favorites</Link> */}
+            <Link href="/favorites">Favorites</Link>
           </div>
         </div>
 
