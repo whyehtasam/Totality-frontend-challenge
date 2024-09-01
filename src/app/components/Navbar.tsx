@@ -12,12 +12,14 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
-import { Home, Menu, Search, ShoppingCart, User } from "lucide-react";
+import { Home, Menu, Search, ShoppingCart, User,BookOpen, Heart } from "lucide-react";
 import { useBooking } from "@/context/BookingContext"; // Import useBooking hook
 import { auth } from "@/app/utils/firebaseConfig"; // Import Firebase auth
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import ShimmerButton from "@/components/magicui/shimmer-button";
+
+
 const Navbar = () => {
   const { cart } = useBooking(); // Get cart from context
   const cartItemsCount = cart.reduce(
@@ -70,14 +72,19 @@ const Navbar = () => {
               <Home className="mr-2 h-6 w-6" />
               <span className="font-bold">Property Rental</span>
             </Link>
-            <div className="my-4 flex flex-col space-y-3">
-              <Link href="/" className="block">
+            <div className="my-4 flex flex-col space-y-5 ">
+              <Link href="/" className="flex items-center space-x-2 font-semibold tracking-wide ">
+                <Home className="h-5 w-5 mr-2" />
                 Home
               </Link>
-              <Link href="/booking" className="block">
+              <Link href="/booking" className="flex items-center space-x-2 font-semibold tracking-wide ">
+                <BookOpen className="h-5 w-5 mr-2" />
                 Bookings
               </Link>
-              <Link href="/favorites" className="block">Favorites</Link>
+              <Link href="/favorites" className="flex items-center space-x-2 font-semibold tracking-wide ">
+                <Heart className="h-5 w-5 mr-2" />
+                Favorites
+              </Link>
             </div>
           </SheetContent>
         </Sheet>
@@ -86,24 +93,30 @@ const Navbar = () => {
             <Home className="hidden sm:inline-block h-6 w-6" />
             <span className=" font-bold sm:inline-block">Property Rental</span>
           </Link>
-          <div className="hidden sm:inline-block sm:flex items-center space-x-4 text-sm font-medium">
-            {/* <Link href="/">Home</Link> */}
-            <Link href="/booking">Bookings</Link>
-            {/* <Link href="/cart">Cart</Link> */}
-            <Link href="/favorites">Favorites</Link>
-          </div>
+          
         </div>
 
         <div className="flex flex-1 items-center justify-end space-x-2 md:justify-end">
           <div className="hidden sm:inline-block w-full flex-1 md:w-auto md:flex-none">
-            <form className="relative">
+            {/* <form className="relative">
               <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
               <Input
                 type="search"
                 placeholder="Search properties..."
                 className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
               />
-            </form>
+            </form> */}
+            <div className="hidden sm:inline-block sm:flex items-center space-x-4 text-sm font-medium">
+            {/* <Link href="/">Home</Link> */}
+            <Link href="/booking" className="flex items-center space-x-2 font-semibold tracking-wide ">
+                <BookOpen className="h-5 w-5 mr-2" />
+                Bookings
+              </Link>
+              <Link href="/favorites" className="flex items-center space-x-2 font-semibold tracking-wide ">
+                <Heart className="h-5 w-5 mr-2 " />
+                Favorites
+              </Link>
+          </div>
           </div>
           <nav className="flex items-center space-x-2 ">
             <Link href="/cart">

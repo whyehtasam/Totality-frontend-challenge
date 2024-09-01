@@ -8,7 +8,6 @@ Welcome to the Real Estate Booking Platform! This project is a frontend challeng
 
 - [Tech Stack](#-tech-stack)
 - [Features](#-features)
-- [Project Structure](#-project-structure)
 - [Setup and Usage](#-setup-and-usage)
 - [Approach and Implementation](#-approach-and-implementation)
 - [Additional Notes](#-additional-notes)
@@ -36,11 +35,6 @@ Welcome to the Real Estate Booking Platform! This project is a frontend challeng
 - **Authentication**: Login and logout using Google authentication.
 - **Responsive Design**: Fully responsive and optimized for all devices.
 - **File-based Routing**: Utilizes Next.js file-based routing for easy navigation.
-
-## 🏗 Project Structure
-
-The project follows a modular structure with clear separation of concerns:
-/totality-frontend-challenge │ ├── /app │ ├── /property │ │ ├── /[id] │ │ │ └── page.tsx # Dynamic Property Details Page │ │ └── page.tsx # Properties Listing Page │ ├── /booking │ │ └── page.tsx # Booking Management Page │ ├── /cart │ │ └── page.tsx # Cart Page │ ├── /checkout │ │ └── page.tsx # Checkout Page │ ├── /components # Shared Components │ │ ├── Navbar.tsx │ │ ├── Footer.tsx │ │ ├── PropertyCard.tsx │ │ ├── CartItem.tsx │ │ ├── FilterBar.tsx # Filter Bar for properties │ │ ├── CheckoutForm.tsx # Checkout Form Component │ │ └── PropertyList.tsx # List of Properties Component │ ├── /context │ │ └── BookingContext.tsx # Context API for managing state │ ├── /styles │ │ └── globals.css # Global Styles │ ├── /utils │ │ └── helpers.ts # Utility functions │ ├── layout.tsx # Main Layout File │ └── page.tsx # Home Page │ ├── /public # Public Assets │ └── /images # Images Folder │ └── logo.png # Logo │ ├── next.config.js # Next.js Configuration ├── tsconfig.json # TypeScript Configuration └── package.json # Project Dependencies
 
 ## Approach and Implementation
 
@@ -71,7 +65,7 @@ The project follows a modular structure with clear separation of concerns:
 
 - **Cart Management:** Users can add properties to their cart, adjust the quantity, and view the total price dynamically.
 - **Booking Status:** The status of each booking is dynamically updated and displayed to the user.
-- **Authentication Flow:** Users must log in to add properties to their cart or mark them as favorites.
+- **Authentication Flow:** Users can log in or sign up to the page using email and password or google account simply.
 - **Favorites:** Properties can be added or removed from the favorites list, which is stored in the global state.
 - **Checkout:** After adding properties to the cart, users can proceed to checkout, where they will see the final booking status.
 
