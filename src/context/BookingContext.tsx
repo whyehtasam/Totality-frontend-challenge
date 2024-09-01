@@ -14,16 +14,19 @@ interface Property {
   quantity?: number;
   amenities: string[];
   bookingDate?: string;
+  status?: "Pending" | "Purchased"; // Add status property
 }
 
 interface BookingContextProps {
   cart: Property[];
-  favorites: Set<string>; // Use a Set to store favorite property IDs
+  purchasedItems: Property[]; // New state to keep track of purchased items
+  favorites: Set<string>;
   total: number;
   addToCart: (property: Property) => void;
   removeFromCart: (id: number) => void;
   updateCartItem: (id: number, quantity: number) => void;
   clearCart: () => void;
+  completePurchase: () => void; // Function to mark items as purchased
   toggleFavorite: (id: number) => void;
   isFavorite: (id: number) => boolean;
 }
@@ -32,6 +35,7 @@ const BookingContext = createContext<BookingContextProps | undefined>(undefined)
 
 export const BookingProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [cart, setCart] = useState<Property[]>([]);
+  const [purchasedItems, setPurchasedItems] = useState<Property[]>([]); // Initialize purchased items state
   const [favorites, setFavorites] = useState<Set<string>>(new Set());
 
   const addToCart = (property: Property) => {
@@ -42,9 +46,10 @@ export const BookingProvider: React.FC<{ children: ReactNode }> = ({ children })
           item.id === property.id ? { ...item, quantity: (item.quantity || 1) + 1 } : item
         );
       }
-      return [...prevCart, { ...property, quantity: 1 }];
+      return [...prevCart, { ...property, quantity: 1, status: "Pending" }]; // Added missing bracket here
     });
   };
+  
 
   const removeFromCart = (id: number) => {
     setCart((prevCart) => prevCart.filter((item) => item.id !== id));
@@ -60,6 +65,14 @@ export const BookingProvider: React.FC<{ children: ReactNode }> = ({ children })
 
   const clearCart = () => {
     setCart([]);
+  };
+
+  const completePurchase = () => {
+    setPurchasedItems((prevPurchased) => [
+      ...prevPurchased,
+      ...cart.map(item => ({ ...item, status: "Purchased" }))
+    ]);
+    clearCart(); // Clear the cart after purchase
   };
 
   const toggleFavorite = (id: number) => {
@@ -82,12 +95,14 @@ export const BookingProvider: React.FC<{ children: ReactNode }> = ({ children })
     <BookingContext.Provider
       value={{
         cart,
+        purchasedItems,
         favorites,
         total,
         addToCart,
         removeFromCart,
         updateCartItem,
         clearCart,
+        completePurchase,
         toggleFavorite,
         isFavorite,
       }}

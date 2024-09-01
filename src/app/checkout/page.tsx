@@ -1,4 +1,3 @@
-// /app/checkout/page.tsx
 "use client";
 
 import React, { useState } from "react";
@@ -6,8 +5,9 @@ import { useBooking } from "@/context/BookingContext";
 import CheckoutForm from "../components/CheckoutForm";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { CheckCircle, Calendar, Mail, PhoneCall } from "lucide-react";
+
 const CheckoutPage: React.FC = () => {
-  const { cart, total } = useBooking();
+  const { cart, total, completePurchase } = useBooking();
   const [submitted, setSubmitted] = useState(false);
 
   const handleCheckout = (bookingDetails: {
@@ -16,6 +16,7 @@ const CheckoutPage: React.FC = () => {
     phone: string;
   }) => {
     console.log("Booking Details:", bookingDetails);
+    completePurchase(); // Mark items as purchased
     setSubmitted(true);
   };
 
@@ -63,7 +64,6 @@ const CheckoutPage: React.FC = () => {
         <p>Your cart is empty. Please add properties to your cart.</p>
       ) : (
         <>
-          {/* <div className="mb-4">Total: ${total}</div> */}
           <CheckoutForm onSubmit={handleCheckout} />
         </>
       )}

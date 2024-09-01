@@ -1,3 +1,4 @@
+//app\cart\page.tsx
 "use client";
 
 import React, { useState } from "react";
@@ -5,18 +6,9 @@ import { useRouter } from "next/navigation";
 import { useBooking } from "@/context/BookingContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-  DialogDescription,
-  DialogFooter,
-} from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
 import { MinusCircle, PlusCircle, Trash2, Eye } from "lucide-react";
-import { Calendar, DollarSign, MapPin } from "lucide-react";
+
 // Import or define your item type here
 interface item {
   id: number;
