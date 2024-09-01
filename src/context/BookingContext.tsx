@@ -14,7 +14,7 @@ interface Property {
   quantity?: number;
   amenities: string[];
   bookingDate?: string;
-  status?: "Pending" | "Purchased"; // Add status property
+  status?: string; // Add status property
 }
 
 interface BookingContextProps {

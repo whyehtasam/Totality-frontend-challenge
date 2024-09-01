@@ -77,7 +77,7 @@ const Navbar = () => {
               <Link href="/booking" className="block">
                 Bookings
               </Link>
-              {/* <Link href="/favorites" className="block">Favorites</Link> */}
+              <Link href="/favorites" className="block">Favorites</Link>
             </div>
           </SheetContent>
         </Sheet>
