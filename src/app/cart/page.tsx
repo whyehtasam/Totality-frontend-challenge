@@ -44,7 +44,7 @@ export default function CartPage() {
   };
 
   return (
-    <div className="container max-w-3xl p-4 mx-auto">
+    <div className="container max-w-3xl p-4 mx-auto min-h-[95vh]">
       <h1 className="mb-8 text-3xl font-bold">Your Cart</h1>
       {cart.length > 0 ? (
         <>

@@ -14,7 +14,7 @@ export default function BookingPage() {
   const combinedItems = [...cart, ...purchasedItems];
 
   return (
-    <div className="container max-w-3xl p-4 mx-auto">
+    <div className="container max-w-3xl p-4 mx-auto min-h-[95vh]">
       <h1 className="mb-8 text-3xl font-bold">Booking Management</h1>
       <Card className="w-full  mx-auto my-12 pt-5">
         {/* <CardHeader>

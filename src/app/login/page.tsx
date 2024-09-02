@@ -48,7 +48,7 @@ export default function LoginForm() {
   };
 
   return (
-    <Card className="mx-auto max-w-sm sm:my-24 my-12">
+    <Card className="mx-auto sm:max-w-sm sm:my-24 my-12 w-[95%] ">
       <CardHeader>
         <CardTitle className="text-2xl">Login</CardTitle>
         <CardDescription>

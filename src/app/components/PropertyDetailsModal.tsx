@@ -50,7 +50,7 @@ export default function PropertyDetailsDialog({ item, onClose }: PropertyDetails
           View Details
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[425px] w-[95%] rounded-lg">
         <DialogHeader>
           <DialogTitle>{item.title}</DialogTitle>
           <DialogDescription>{item.location}</DialogDescription>

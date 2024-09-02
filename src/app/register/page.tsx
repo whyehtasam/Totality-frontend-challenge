@@ -51,7 +51,7 @@ const Register = () => {
   };
 
   return (
-    <Card className="max-w-sm mx-auto my-10 sm:my-20">
+    <Card className="w-[95%] sm:max-w-sm mx-auto my-10 sm:my-20">
       <CardHeader>
         <CardTitle className="text-2xl">Register</CardTitle>
         <CardDescription>

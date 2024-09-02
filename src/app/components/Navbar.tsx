@@ -141,10 +141,11 @@ const Navbar = () => {
                   Favorites
                 </Button>
               </Link>
-              <ModeToggle />
+            
             </div>
           </div>
           <nav className="flex items-center space-x-2 ">
+          <ModeToggle />
             <Link href="/cart">
               <Button variant="ghost" size="icon" className="md:flex relative">
                 <ShoppingCart className="h-5 w-5" />

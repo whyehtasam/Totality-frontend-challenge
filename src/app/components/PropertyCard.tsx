@@ -99,7 +99,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
         </div>
         <Button
           onClick={handleBookNow}
-          className="active:scale-95 transition-all hover:bg-gray-700"
+          className="active:scale-95 transition-all hover:bg-gray-700 hover:dark:text-white"
         >
           Book Now
         </Button>
