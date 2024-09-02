@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import PropertyList from "@/app/components/PropertyList";
 import FilterBar from "@/app/components/FilterBar";
 import { properties } from "./utils/dummyData";
+import Hero from "./components/Hero";
 
 export default function HomePage() {
   const [filteredProperties, setFilteredProperties] = useState(properties);
@@ -45,6 +46,7 @@ export default function HomePage() {
   return (
     <div className="container mx-auto p-4 min-h-[80vh] ">
       {/* <h1 className="text-4xl font-bold text-center mb-8">Property Listings</h1> */}
+      <Hero/>
       <FilterBar onFilterChange={handleFilterChange} />
       <PropertyList properties={filteredProperties} />
     </div>

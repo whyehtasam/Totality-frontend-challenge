@@ -55,7 +55,9 @@ const FilterBar: React.FC<FilterBarProps> = ({ onFilterChange }) => {
 
   return (
     <div className="block space-y-8 sm:space-y-0 sm:flex sm:justify-between sm:items-center sm:mb-8 mb-4">
-      <h1 className="text-3xl font-bold text-left">Discover Places to Stay</h1>
+       <h1 className="text-3xl  font-bold sm:font-extrabold  text-gray-900 sm:text-5xl dark:text-white sm:mb-5 mb-0">
+                Discover Places to Stay
+              </h1>
       <div className="w-full sm:w-auto flex items-end place-content-end"><Dialog open={isFilterOpen} onOpenChange={setIsFilterOpen}>
         <DialogTrigger asChild>
           <Button
