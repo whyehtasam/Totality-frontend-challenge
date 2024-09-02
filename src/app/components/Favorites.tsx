@@ -2,7 +2,7 @@ import React from "react";
 import { useBooking } from "@/context/BookingContext"; // Ensure this path is correct
 import PropertyCard from "@/app/components/PropertyCard";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {properties} from "@/app/utils/dummyData"
+import { properties } from "@/app/utils/dummyData";
 const Favorites: React.FC = () => {
   const { favorites, cart } = useBooking();
   console.log({ favorites, cart });
@@ -13,12 +13,16 @@ const Favorites: React.FC = () => {
   );
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {favoriteProperties.length > 0 ? (
-        favoriteProperties.map((property) => (
-          <PropertyCard key={property.id} property={property} />
-        ))
-      ) : (
+    <>
+      {favoriteProperties.length > 0 && (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {favoriteProperties.map((property) => (
+            <PropertyCard key={property.id} property={property} />
+          ))}
+        </div>
+      )}
+
+      {favoriteProperties.length === 0 && (
         <Card className="container p-4 text-center">
           <CardHeader>
             <CardTitle>No Favorites Yet</CardTitle>
@@ -28,9 +32,8 @@ const Favorites: React.FC = () => {
           </CardContent>
         </Card>
       )}
-    </div>
+    </>
   );
 };
 
 export default Favorites;
-
