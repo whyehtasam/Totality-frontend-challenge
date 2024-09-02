@@ -12,14 +12,21 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
-import { Home, Menu, Search, ShoppingCart, User,BookOpen, Heart } from "lucide-react";
+import {
+  Home,
+  Menu,
+  Search,
+  ShoppingCart,
+  User,
+  BookOpen,
+  Heart,
+} from "lucide-react";
 import { useBooking } from "@/context/BookingContext"; // Import useBooking hook
 import { auth } from "@/app/utils/firebaseConfig"; // Import Firebase auth
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import ShimmerButton from "@/components/magicui/shimmer-button";
-
-
+import ModeToggle from "./ThemeToggleButton";
 const Navbar = () => {
   const { cart } = useBooking(); // Get cart from context
   const cartItemsCount = cart.reduce(
@@ -73,15 +80,24 @@ const Navbar = () => {
               <span className="font-bold">Property Rental</span>
             </Link>
             <div className="my-4 flex flex-col space-y-5 ">
-              <Link href="/" className="flex items-center space-x-2 font-semibold tracking-wide ">
+              <Link
+                href="/"
+                className="flex items-center space-x-2 font-semibold tracking-wide "
+              >
                 <Home className="h-5 w-5 mr-2" />
                 Home
               </Link>
-              <Link href="/booking" className="flex items-center space-x-2 font-semibold tracking-wide ">
+              <Link
+                href="/booking"
+                className="flex items-center space-x-2 font-semibold tracking-wide "
+              >
                 <BookOpen className="h-5 w-5 mr-2" />
                 Bookings
               </Link>
-              <Link href="/favorites" className="flex items-center space-x-2 font-semibold tracking-wide ">
+              <Link
+                href="/favorites"
+                className="flex items-center space-x-2 font-semibold tracking-wide "
+              >
                 <Heart className="h-5 w-5 mr-2" />
                 Favorites
               </Link>
@@ -93,7 +109,6 @@ const Navbar = () => {
             <Home className="hidden sm:inline-block h-6 w-6" />
             <span className=" font-bold sm:inline-block">Property Rental</span>
           </Link>
-          
         </div>
 
         <div className="flex flex-1 items-center justify-end space-x-2 md:justify-end">
@@ -106,17 +121,28 @@ const Navbar = () => {
                 className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
               />
             </form> */}
-            <div className="hidden sm:inline-block sm:flex items-center space-x-4 text-sm font-medium">
-            {/* <Link href="/">Home</Link> */}
-            <Link href="/booking" className="flex items-center space-x-2 font-semibold tracking-wide ">
-                <BookOpen className="h-5 w-5 mr-2" />
-                Bookings
+            <div className="hidden  sm:flex items-center space-x-2 text-sm font-medium">
+              {/* <Link href="/">Home</Link> */}
+              <Link
+                href="/booking"
+                className="flex items-center space-x-2 font-semibold tracking-wide "
+              >
+                <Button variant="ghost" className="">
+                  <BookOpen className="h-5 w-5 mr-2" />
+                  Bookings
+                </Button>
               </Link>
-              <Link href="/favorites" className="flex items-center space-x-2 font-semibold tracking-wide ">
-                <Heart className="h-5 w-5 mr-2 " />
-                Favorites
+              <Link
+                href="/favorites"
+                className="flex items-center space-x-2 font-semibold tracking-wide "
+              >
+                <Button variant="ghost" className="">
+                  <Heart className="h-5 w-5 mr-2 " />
+                  Favorites
+                </Button>
               </Link>
-          </div>
+              <ModeToggle />
+            </div>
           </div>
           <nav className="flex items-center space-x-2 ">
             <Link href="/cart">

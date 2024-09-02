@@ -13,13 +13,13 @@ const Favorites: React.FC = () => {
   );
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-6">
       {favoriteProperties.length > 0 ? (
         favoriteProperties.map((property) => (
           <PropertyCard key={property.id} property={property} />
         ))
       ) : (
-        <Card className="p-4 text-center">
+        <Card className="container p-4 text-center">
           <CardHeader>
             <CardTitle>No Favorites Yet</CardTitle>
           </CardHeader>

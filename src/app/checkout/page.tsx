@@ -22,7 +22,7 @@ const CheckoutPage: React.FC = () => {
 
   if (submitted) {
     return (
-      <div className="container mx-auto p-4 min-h-screen flex items-center justify-center">
+      <div className="container mx-auto p-4 sm:my-20 my-12 flex items-center justify-center">
         <Card className="w-full max-w-md border-slate-200">
           <CardHeader className="text-center">
             <div className="mx-auto mb-4 bg-slate-100 rounded-full p-3 w-16 h-16 flex items-center justify-center">
