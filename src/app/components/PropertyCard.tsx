@@ -8,7 +8,19 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useBooking } from "@/context/BookingContext";
-import { Heart, MapPin, Bed, Wifi, DollarSign, Waves } from "lucide-react";
+import {
+  Heart,
+  MapPin,
+  Bed,
+  Wifi,
+  DollarSign,
+  Waves,
+  FlameIcon,
+  TreePalmIcon,
+  TreesIcon,
+  Dumbbell,
+  ParkingCircleIcon
+} from "lucide-react";
 
 interface Property {
   id: number;
@@ -35,6 +47,27 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
   const handleBookNow = () => {
     const bookingDate = new Date().toISOString(); // Get the current date
     addToCart({ ...property, bookingDate }); // Add the property with the booking date to the cart
+  };
+
+  // Function to render icons based on amenities
+  const renderAmenityIcon = (amenity: string) => {
+    switch (amenity) {
+      case "WiFi":
+        return <Wifi className="h-4 w-4 mr-1" />;
+      case "Pool":
+        return <Waves className="h-4 w-4 mr-1" />;
+      case "Gym":
+        return <Dumbbell className="h-4 w-4 mr-1" />;
+      case "Parking":
+        return <ParkingCircleIcon className="h-4 w-4 mr-1" />;
+      case "Fireplace":
+        return <FlameIcon className="h-4 w-4 mr-1" />;
+      case "Garden":
+        return <TreesIcon className="h-4 w-4 mr-1" />;
+      
+      default:
+        return null;
+    }
   };
 
   return (
@@ -75,18 +108,8 @@ const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
           </div>
           {property.amenities.map((amenity) => (
             <div key={amenity} className="flex items-center">
-              {amenity === "WiFi" && (
-                <>
-                  <Wifi className="h-4 w-4 mr-1" />
-                  <span>WiFi</span>
-                </>
-              )}
-              {amenity === "Pool" && (
-                <>
-                  <Waves className="h-4 w-4 mr-1" />
-                  <span>Pool</span>
-                </>
-              )}
+              {renderAmenityIcon(amenity)}
+              <span>{amenity}</span>
             </div>
           ))}
         </div>
